@@ -1,0 +1,11 @@
+<button class="info" (click)="get_products()">GET /products</button>
+<label>
+  <input
+    classname="form-control" type="text"
+    (keyup.enter)="createPost(title)" #title>
+</label>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let post of posts">
+    {{ post.title }}
+  </li>
+</ul>
