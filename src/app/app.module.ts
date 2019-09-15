@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { PostsComponent } from "./posts/posts.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatFormFieldModule, MatListModule, MatInputModule, MatButtonModule, MatGridListModule } from "@angular/material";
+import { PostService } from "./post.service";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MatFormFieldModule, MatListModule, MatInputModule, MatButtonModule, Mat
     MatGridListModule,
   ],
   providers: [
+    PostService
   ],
   bootstrap: [
     AppComponent

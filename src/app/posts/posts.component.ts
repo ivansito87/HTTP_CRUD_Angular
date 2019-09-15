@@ -16,6 +16,9 @@ import { MatButtonModule, MatCheckboxModule } from "@angular/material";
 })
 export class PostsComponent implements OnInit {
 
+  // :TODO this class violates the separation of concerns principle because it is
+  // doing to many things at the same time, like in a restaurant the chef should only care about cooking
+
   // private posts = [];
   private baseUrl = "https://jsonplaceholder.typicode.com/posts";
   posts: string[];
@@ -48,9 +51,25 @@ export class PostsComponent implements OnInit {
     this.httpClient.post(this.baseUrl, JSON.stringify(post))
       .subscribe((response: any) => {
         post['id'] = response.id;
+        // @ts-ignore
         this.posts.splice(0, 0, post);
         console.log("response", response);
       });
+  }
+
+  updatePost(post){
+    this.httpClient.patch(`${this.baseUrl}/${post.id}`, JSON.stringify({isRead: true}))
+      .subscribe(response => {
+        console.log("response from the patch method", response);
+      })
+  }
+
+  deletePost(post){
+    this.httpClient.delete(`${this.baseUrl}/${post.id}`)
+      .subscribe(response => {
+        let index = this.posts.indexOf(post);
+        this.posts.splice(index, 1);
+    })
   }
 }
 

@@ -15,9 +15,11 @@
 
 <div>
 <mat-selection-list #post>
-  <mat-list-option *ngFor="let post of posts">
+  <mat-list-item *ngFor="let post of posts">
+    <button mat-button (click)="updatePost(post)">Update</button>
+    <button mat-button (click)="deletePost(post)">Delete</button>
     {{post.title}}
-  </mat-list-option>
+  </mat-list-item>
 </mat-selection-list>
 
 <p>
