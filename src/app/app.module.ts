@@ -4,6 +4,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { PostsComponent } from "./posts/posts.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatFormFieldModule, MatListModule, MatInputModule, MatButtonModule, MatGridListModule } from "@angular/material";
+
 
 @NgModule({
   declarations: [
@@ -13,7 +16,13 @@ import { PostsComponent } from "./posts/posts.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatListModule,
+    MatButtonModule,
+    MatGridListModule,
   ],
   providers: [
   ],
@@ -21,5 +30,5 @@ import { PostsComponent } from "./posts/posts.component";
     AppComponent
   ]
 })
-  
+
 export class AppModule {}

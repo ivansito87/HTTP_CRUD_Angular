@@ -1,4 +1,37 @@
-<button class="info" (click)="get_products()">GET /products</button>
+
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+<button mat-raised-button color="accent" classname="block" (click)="get_products()">Get posts</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field class="example-full-width">
+  <label>
+    <input matInput placeholder="Favorite food"
+           (keyup.enter)="createPost(title)" #title>
+  </label>
+</mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<div>
+<mat-selection-list #post>
+  <mat-list-option *ngFor="let post of posts">
+    {{post.title}}
+  </mat-list-option>
+</mat-selection-list>
+
+<p>
+  Options selected: {{post.selectedOptions.selected.length}}
+</p>
+  </div>
+<!--<mat-form-field class="example-full-width">
+  <label>
+    <textarea matInput placeholder="Leave a comment"></textarea>
+  </label>
+</mat-form-field>-->
+
+
+<!--
 <label>
   <input
     classname="form-control" type="text"
@@ -9,3 +42,5 @@
     {{ post.title }}
   </li>
 </ul>
+-->
+

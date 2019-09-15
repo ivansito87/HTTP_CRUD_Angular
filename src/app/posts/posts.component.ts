@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { MatButtonModule, MatCheckboxModule } from "@angular/material";
+
+
+@NgModule({
+  imports: [MatButtonModule, MatCheckboxModule],
+  exports: [MatButtonModule, MatCheckboxModule],
+})
+
 
 @Component({
   selector: "posts",
@@ -8,9 +16,9 @@ import { HttpClient } from "@angular/common/http";
 })
 export class PostsComponent implements OnInit {
 
-  private posts = [];
+  // private posts = [];
   private baseUrl = "https://jsonplaceholder.typicode.com/posts";
-
+  posts: string[];
   constructor(private httpClient: HttpClient) {
   }
 
@@ -22,16 +30,17 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  // similar to component did mount
-  ngOnInit() {
-    this.httpClient.get(this.baseUrl)
-      .subscribe((response: any[]) => {
-        this.posts = response;
-        console.log(this.posts);
-      });
-
-
+  ngOnInit(): void {
   }
+
+  // similar to component did mount
+  // ngOnInit() {
+  //   this.httpClient.get(this.baseUrl)
+  //     .subscribe((response: any[]) => {
+  //       this.posts = response;
+  //       console.log(this.posts);
+  //     });
+  // }
 
   createPost(inputElement: HTMLInputElement) {
     let post = {title: inputElement.value};
