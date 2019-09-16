@@ -30,12 +30,9 @@ export class PostsComponent implements OnInit {
   // called with the button click on html
   get_posts() {
     // extracted from the service
-    this.service.get_products()
+    this.service.getAll()
       .subscribe(response => {
         this.posts = response;
-      }, error => {
-        alert("Unexpected error has occurred!");
-        console.log(error);
       });
   }
 
@@ -55,9 +52,9 @@ export class PostsComponent implements OnInit {
     let post = {title: inputElement.value};
     inputElement.value = "";
     // calling the method from the service module
-    this.service.httpCreatePost(post)
-      .subscribe((response: any) => {
-        post['id'] = response.id;
+    this.service.create(post)
+      .subscribe(newPost => {
+        post['id'] = newPost.id;
         // @ts-ignore
         this.posts.splice(0, 0, post);
       }, (error: Response) => {
@@ -65,27 +62,21 @@ export class PostsComponent implements OnInit {
           // there are better ways of handling the errors when
           // one common method in Angular is to use the
           // this.form.setErrors(error.json());
-          console.log("error", error);
-        } else {
-          alert("Unexpected error has occurred!");
-          console.log(error);
-        }
+        // we need to throw the error so that it can be handled by the global object
+        } else throw error;
       });
   }
 
   updatePost(post) {
-    this.service.updatePost(post.id)
-      .subscribe(response => {
-        console.log("response from the patch method", response);
-      }, error => {
-        alert("Unexpected error has occurred!");
-        console.log(error);
-      })
+    this.service.update(post.id)
+      .subscribe(updatedPost => {
+        console.log("response from the patch method", updatedPost);
+      });
   }
 
   deletePost(post) {
-    this.service.deletePost(post.id)
-      .subscribe(response => {
+    this.service.delete(post.id)
+      .subscribe(() => {
         // @ts-ignore
         let index = this.posts.indexOf(post);
         // @ts-ignore
@@ -94,10 +85,7 @@ export class PostsComponent implements OnInit {
       }, (error: AppError) => {
         if (error instanceof NotFoundError) {
           alert("This post has already been deleted")
-        } else {
-          alert("Unexpected error has occurred");
-          console.log(error);
-        }
+        } else throw error;
       })
   }
 
