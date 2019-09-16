@@ -32,6 +32,7 @@ export class PostsComponent implements OnInit {
     // extracted from the service
     this.service.getAll()
       .subscribe(response => {
+        console.log("response from getting all the posts", response);
         this.posts = response;
       });
   }

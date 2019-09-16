@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-// import "rxjs/add/operator/catch";
 import { Observable, of, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 import { AppError } from "../common/app-error";
@@ -47,7 +46,6 @@ export class DataService {
        map(response => response),
       catchError(this.handleError)
     );
-
   }
 
   // Created a field inside of the class for error handling
