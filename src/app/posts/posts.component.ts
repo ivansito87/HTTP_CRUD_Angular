@@ -22,7 +22,7 @@ export class PostsComponent implements OnInit {
   // doing to many things at the same time, like in a restaurant the chef should only care about cooking
   // private posts = [];
 
-  posts: Object;
+  posts;
 
   constructor(private service: PostService) {
   }
@@ -54,8 +54,8 @@ export class PostsComponent implements OnInit {
     inputElement.value = "";
     // calling the method from the service module
     this.service.create(post)
-      .subscribe(newPost => {
-        post['id'] = newPost.id;
+      .subscribe(({id}) => {
+        post['id'] = id;
         // @ts-ignore
         this.posts.splice(0, 0, post);
       }, (error: Response) => {
